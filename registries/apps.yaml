@@ -1,0 +1,13 @@
+apps:
+  - name: nexus
+    path: /srv/apps/nexus
+    status: present
+    notes: Router local-first para Qwen 3.6 e judge via Codex.
+  - name: homelab-context
+    path: /srv/apps/homelab-context
+    status: present
+    notes: Contexto em fases para agentes no PC1.
+  - name: gymdose-v1
+    path: /srv/apps/gymdose-v1
+    status: planned
+    notes: Reservado como item planejado; nao observado no host atual.

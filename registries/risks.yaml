@@ -1,0 +1,33 @@
+risks:
+  - id: ai-build-src-heavy
+    severity: medium
+    item: /srv/ai/build e /srv/ai/src
+    note: Grandes e fora de escopo do state repo.
+  - id: hf-cache-not-production
+    severity: low
+    item: /srv/cache/huggingface
+    note: Cache util, mas nao e producao nem deve ser versionado.
+  - id: old-hd-legacy-material
+    severity: medium
+    item: /srv/imports/old-hd
+    note: Material legado exige triagem e auditoria.
+  - id: old-hd-quarantine-forbidden
+    severity: high
+    item: /srv/imports/old-hd/secret-quarantine
+    note: Area proibida para leitura e copia.
+  - id: master-env-forbidden
+    severity: high
+    item: /srv/infra/env/master.env
+    note: Arquivo existe e nao pode ser lido nem versionado.
+  - id: nexus-raw-copy-risk
+    severity: medium
+    item: /srv/apps/nexus
+    note: Pode conter .venv e caches; nao copiar bruto.
+  - id: legacy-service-document-only
+    severity: medium
+    item: qwen36-llama-server.service
+    note: Status inactive/dead deve ser documentado, nao removido agora.
+  - id: litellm-health-401
+    severity: low
+    item: LiteLLM /health
+    note: Resposta 401 sem key nao caracteriza falha critica.

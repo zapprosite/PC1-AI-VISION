@@ -1,0 +1,13 @@
+tunnels:
+  - name: pc2-ssh-tunnel
+    status: allowed-conceptually
+    source: PC2
+    target: PC1 localhost services
+    transport: ssh
+    notes: Acesso previsto por tunnel SSH; nao por bind publico.
+  - name: cloudflare-tunnel
+    status: blocked-until-policy
+    source: internet
+    target: PC1 services
+    transport: cloudflare
+    notes: Nao incluir secrets nem promover exposicao sem policy explicita.

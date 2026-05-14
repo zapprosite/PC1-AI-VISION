@@ -1,0 +1,25 @@
+paths:
+  - path: /srv/ai
+    owner: ai-runtime
+    rule: Referenciar; nao copiar build, src ou runtime real para state repo.
+  - path: /srv/infra
+    owner: infra
+    rule: Usar apenas docs seguras e referencias; nunca ler master.env.
+  - path: /srv/models
+    owner: ai-runtime
+    rule: Referenciar paths; nao copiar GGUFs.
+  - path: /srv/apps
+    owner: platform-apps
+    rule: Referenciar apps; nao espelhar repos inteiros aqui.
+  - path: /srv/core
+    owner: platform-core
+    rule: Nao alterar nem copiar bruto; apenas documentar referencias.
+  - path: /srv/imports/old-hd
+    owner: archaeology
+    rule: Fonte legada; nada de execucao direta ou promocao sem audit.
+  - path: /srv/ops/audits
+    owner: ops
+    rule: Indexar nomes; evitar copiar conteudo completo de audits grandes.
+  - path: /srv/staging
+    owner: promotion-flow
+    rule: Area de transicao controlada antes de promocao.

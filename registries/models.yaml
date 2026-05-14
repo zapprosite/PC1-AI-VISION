@@ -1,0 +1,21 @@
+models:
+  - name: hermes-code
+    kind: alias
+    status: official
+    serves_via: litellm-local
+    notes: Alias oficial para consumo por clientes e agentes.
+  - name: qwen3.6-27b-code
+    kind: alias
+    status: technical
+    serves_via: llama-server
+    notes: Alias tecnico e de debug do runtime local.
+  - name: qwen3.6-27b-code-mtp-ud-q4_k_xl
+    kind: gguf-reference
+    status: canonical
+    path: /srv/models/gguf/qwen3.6-27b-code-mtp-ud-q4_k_xl.gguf
+    notes: Referencia canonica; arquivo nao copiado para este repo.
+  - name: qwen3.6-27b-code-stable-ud-q4_k_xl
+    kind: gguf-reference
+    status: fallback
+    path: /srv/models/gguf/qwen3.6-27b-code-stable-ud-q4_k_xl.gguf
+    notes: Fallback stable; arquivo nao copiado para este repo.

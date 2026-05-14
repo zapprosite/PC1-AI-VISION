@@ -1,0 +1,25 @@
+services:
+  - name: llama-qwen36.service
+    host: will
+    bind: 127.0.0.1
+    port: 8001
+    status: active
+    purpose: Canonical local Qwen 3.6 runtime via llama-server.
+    source_path: /srv/ai/bin/llama-server-mtp-cuda
+    protected: true
+  - name: litellm-local.service
+    host: will
+    bind: 127.0.0.1
+    port: 4018
+    status: active
+    purpose: OpenAI-compatible local gateway and alias layer.
+    source_path: /srv/infra/litellm/config.yaml
+    protected: true
+  - name: qwen36-llama-server.service
+    host: will
+    bind: 127.0.0.1
+    port: 8001
+    status: inactive
+    purpose: Legacy or alternate local Qwen service retained for documentation.
+    source_path: /srv/infra/systemd
+    protected: true
