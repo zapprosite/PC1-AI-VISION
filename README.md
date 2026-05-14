@@ -13,6 +13,7 @@ Este diretório e um inventario sanitizado do PC1. Ele documenta o estado operac
 - state repo local do PC1
 - inventario sanitizado e revisavel
 - ponto de leitura para agentes antes de tocar em producao
+- ponte de leitura para fontes canonicas fora deste repo
 
 ## O que este repo nao e
 
@@ -20,6 +21,7 @@ Este diretório e um inventario sanitizado do PC1. Ele documenta o estado operac
 - copia bruta de `/srv`
 - fonte de runtime real
 - armazenamento de secrets, modelos, caches ou logs brutos
+- fonte canonica do plano MCP/Aider-like
 
 ## Regras centrais
 
@@ -56,6 +58,7 @@ Este diretório e um inventario sanitizado do PC1. Ele documenta o estado operac
 - `gpt-web/` concentra contexto curto, decisoes e proximos passos
 - a ordem de leitura fica em `CONNECTOR_README.md`
 - o objetivo e reduzir re-descoberta entre sessoes sem copiar runtime real
+- `gpt-web/CANONICAL_SOURCES.md` registra onde ficam as fontes canonicas
 
 ## Snapshots/backups
 
@@ -66,9 +69,10 @@ Este diretório e um inventario sanitizado do PC1. Ele documenta o estado operac
 
 ## MCP/Aider-like plan
 
-- este repo registra apenas o plano documental de uma arquitetura agentic local
-- a implementacao real nao comeca aqui e nao toca producao
-- o primeiro passo previsto e um MCP readonly de contexto, com gate humano em P0
+- a fonte canonica do plano MCP/Aider-like e `/srv/apps/homelab-context`
+- este repo registra apenas um resumo sanitizado e nao deve duplicar PRD, arquitetura ou decisoes detalhadas
+- alteracoes de arquitetura do MCP/Aider-like devem ocorrer em `homelab-context`, nao aqui
+- futuro `hermes-brain` deve consolidar a partir de `homelab-context`, nao inventar plano paralelo
 
 ## Fluxo esperado
 

@@ -9,4 +9,7 @@
 - SSD antigo e arqueologia, nao producao
 - PC1 tem Btrfs e Snapper, mas cobertura de `/srv` precisa ser auditada
 - GitHub Ops-lite aplicado
-- proximo: revisar PC1 e PC2, criar `hermes-brain`, depois consolidar o plano MCP/Aider-like real
+- `/srv/apps/homelab-context` e a fonte canonica do plano MCP/Aider-like
+- `PC1-AI-VISION` e apenas state repo, inventario sanitizado e ponte de leitura
+- este repo nao deve duplicar PRD, arquitetura ou decisoes detalhadas do MCP/Aider-like
+- proximo: revisar PC1 e PC2, criar `hermes-brain`, depois consolidar a partir de `/srv/apps/homelab-context`

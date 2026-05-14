@@ -8,7 +8,7 @@
 4. GPT Web memory nos dois
 5. Snapper/backup audit nos dois
 6. `hermes-brain`
-7. MCP/Aider-like discovery em `/srv`
+7. auditar e consolidar o plano MCP/Aider-like existente em `/srv/apps/homelab-context`
 8. MCP read-only
 9. `pipeline.json` generator
 10. Nexus runner/PREVC/judge
