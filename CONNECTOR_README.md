@@ -10,6 +10,18 @@ Este repo foi estruturado para leitura por ChatGPT GitHub Connector quando exist
 - use `policies/` para decidir o que nao fazer
 - use `audits/` para snapshots e historico leve
 
+## Leitura recomendada para ChatGPT
+
+1. `README.md`
+2. `STATUS.md`
+3. `AGENTS.md`
+4. `SECURITY.md`
+5. `registries/services.yaml`
+6. `registries/models.yaml`
+7. `registries/risks.yaml`
+8. `notes/technical-debt.md`
+9. `ROADMAP.md`
+
 ## Limites do conector
 
 - este repo nao contem runtime, secrets ou modelos
