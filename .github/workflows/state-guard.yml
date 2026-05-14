@@ -1,0 +1,101 @@
+name: state-guard
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate required files
+        run: |
+          set -euo pipefail
+          required=(
+            README.md
+            AGENTS.md
+            SECURITY.md
+            CONNECTOR_README.md
+            .gitignore
+            policies/secrets.md
+            policies/exposure.md
+            policies/git-safety.md
+            policies/snapshots-backups.md
+            policies/github-ops.md
+            policies/mcp-aider-like.md
+            registries/services.yaml
+            registries/models.yaml
+            registries/risks.yaml
+            scripts/check-no-secrets.sh
+          )
+          optional=(
+            STATUS.md
+            ROADMAP.md
+          )
+          for file in "${required[@]}"; do
+            [[ -f "$file" ]] || { echo "missing required file: $file"; exit 1; }
+          done
+          for file in "${optional[@]}"; do
+            if [[ -e "$file" && ! -f "$file" ]]; then
+              echo "optional path exists but is not a file: $file"
+              exit 1
+            fi
+          done
+
+      - name: Run secrets guard
+        run: bash scripts/check-no-secrets.sh
+
+      - name: Block forbidden tracked paths
+        run: |
+          set -euo pipefail
+          forbidden='(^|/)(master\.env|auth\.json|credentials\.json|\.credentials\.json|\.env|\.env\..+|[^/]+\.env|secret-quarantine|secrets-config|node_modules|\.venv|__pycache__|cache|huggingface|models|raw)(/|$)|\.(gguf|sqlite|sqlite3|db|log)$'
+          while IFS= read -r path; do
+            [[ -z "$path" ]] && continue
+            if [[ "$path" =~ $forbidden ]]; then
+              echo "forbidden tracked path: $path"
+              exit 1
+            fi
+          done < <(git ls-files)
+
+      - name: Block oversized files
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' file; do
+            rel="${file#./}"
+            size="$(stat -c '%s' "$file")"
+            if [[ "$rel" == audits/*.md ]]; then
+              if (( size > 1048576 )); then
+                echo "oversized audit markdown: $rel ($size bytes)"
+                exit 1
+              fi
+              continue
+            fi
+            if (( size > 524288 )); then
+              echo "oversized file: $rel ($size bytes)"
+              exit 1
+            fi
+          done < <(find . -type f -not -path './.git/*' -print0)
+
+      - name: Validate YAML
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(find . -type f \( -name '*.yaml' -o -name '*.yml' \) -not -path './.git/*' | sort)
+          if [[ "${#files[@]}" -eq 0 ]]; then
+            exit 0
+          fi
+          if python3 -c "import importlib.util, sys; sys.exit(0 if importlib.util.find_spec('yaml') else 1)"
+          then
+            python3 -c "import sys, yaml; [yaml.safe_load(open(path, encoding='utf-8')) for path in sys.argv[1:]]" "${files[@]}"
+          else
+            for file in "${files[@]}"; do
+              [[ -s "$file" ]] || { echo "empty yaml file: $file"; exit 1; }
+              grep -q ':' "$file" || { echo "yaml file missing ':' content: $file"; exit 1; }
+            done
+          fi

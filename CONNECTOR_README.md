@@ -12,15 +12,19 @@ Este repo foi estruturado para leitura por ChatGPT GitHub Connector quando exist
 
 ## Leitura recomendada para ChatGPT
 
-1. `README.md`
-2. `STATUS.md`
-3. `AGENTS.md`
-4. `SECURITY.md`
-5. `registries/services.yaml`
-6. `registries/models.yaml`
-7. `registries/risks.yaml`
-8. `notes/technical-debt.md`
-9. `ROADMAP.md`
+1. `gpt-web/CONTEXT_BRIEF.md`
+2. `gpt-web/NEXT_ACTIONS.md`
+3. `gpt-web/DECISIONS.md`
+4. `README.md`
+5. `AGENTS.md`
+6. `SECURITY.md`
+7. `policies/github-ops.md`
+8. `policies/snapshots-backups.md`
+9. `policies/mcp-aider-like.md`
+10. `registries/services.yaml`
+11. `registries/models.yaml`
+12. `registries/risks.yaml`
+13. `ROADMAP.md`
 
 ## Limites do conector
 

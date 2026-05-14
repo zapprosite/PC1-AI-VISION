@@ -43,6 +43,32 @@ Este diretório e um inventario sanitizado do PC1. Ele documenta o estado operac
 - `audits/`: snapshots textuais pequenos e indices de auditoria
 - `scripts/`: rotinas readonly para regenerar snapshots e checagem de secrets
 - `notes/`: divida tecnica e proximos passos
+- `gpt-web/`: memoria operacional curta para sessoes web e conector
+
+## GitHub Ops-lite
+
+- GitHub neste repo e GitOps-lite documental
+- nao existe deploy, runner self-hosted ou acao em `/srv`
+- Actions validam apenas docs sanitizados, YAML, paths proibidos e ausencia de secrets
+
+## GPT Web memory
+
+- `gpt-web/` concentra contexto curto, decisoes e proximos passos
+- a ordem de leitura fica em `CONNECTOR_README.md`
+- o objetivo e reduzir re-descoberta entre sessoes sem copiar runtime real
+
+## Snapshots/backups
+
+- snapshot local nao e backup
+- Git nao e backup de disco
+- audit markdown nao e rollback
+- cobertura de `/srv` e `/home` por Btrfs/Snapper precisa de auditoria explicita
+
+## MCP/Aider-like plan
+
+- este repo registra apenas o plano documental de uma arquitetura agentic local
+- a implementacao real nao comeca aqui e nao toca producao
+- o primeiro passo previsto e um MCP readonly de contexto, com gate humano em P0
 
 ## Fluxo esperado
 
